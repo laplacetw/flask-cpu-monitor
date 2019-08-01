@@ -1,0 +1,6 @@
+pip install itsdangerous-1.1.0-py2.py3-none-any.whl
+pip install MarkupSafe-1.1.1-cp37-cp37m-win_amd64.whl
+pip install Click-7.0-py2.py3-none-any.whl
+pip install Werkzeug-0.15.5-py2.py3-none-any.whl
+pip install Jinja2-2.10.1-py2.py3-none-any.whl
+pip install Flask-1.1.1-py2.py3-none-any.whl

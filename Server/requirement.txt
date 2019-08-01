@@ -1,0 +1,11 @@
+APScheduler==3.6.0
+Click==7.0
+Flask==1.1.1
+itsdangerous==1.1.0
+Jinja2==2.10.1
+MarkupSafe==1.1.1
+psutil==5.6.3
+pytz==2019.1
+six==1.12.0
+tzlocal==1.5.1
+Werkzeug==0.15.5

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang=en>
+    <head>
+        <meta charset="utf-8">
+        <meta name="author" content="Nick.Liu">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <script src="../static/font_awesome_free_v5.8.2.js"></script>
+        <script src="../static/jquery.min.v3.4.1.js"></script>
+        <script src="../static/popper.min.v1.14.7.js"></script>
+        <script src="../static/bootstrap.min.v4.3.1.js"></script>
+        <script src="../static/apexcharts.min.js"></script>
+        <link rel="stylesheet" href="../static/bootstrap.min.v4.3.1.css">
+        <title>CPU Monitor</title>
+    </head>
+    <body style="background-color: #343F56;">
+        <div class="container-fluid text-align-start my-sm-3" id="dashboard"></div>
+        <script>
+            var host = 'http://' + '{{ ip }}' +  ':8080/',
+                list_chart = [];
+            init();
+            
+            $(document).ready(function(){
+                setTimeout(function reUpdateData(){     
+                    update_data();
+                    setTimeout(reUpdateData, 10000);       
+                }, 10000);
+            });
+            
+            $(document).ready(function(){ 
+                setTimeout(function reUpdateChart(){     
+                    update_chart();
+                    setTimeout(reUpdateChart, 10000);       
+                }, 10000);
+            });
+
+            function init(){
+                $.ajax({
+                    url: (host + 'api'),
+                    type: "GET",
+                    headers: {
+                        "accept":"application/json; odata=verbose"
+                    },
+                    success: function(res){
+                        let row = 1, col = 1,
+                            dashboard = $('#dashboard'),
+                            data = res.data,
+                            len = Object.keys(data).length;
+                        
+                        $.each(data, function(index, elem){
+                            let line = "", ip = "", cpu = "", ram = "",
+                                id_row = "", id_col = "", chart = "";
+                            
+                            try{
+                                line = elem.split(','),
+                                ip = line[0],
+                                cpu = line[1],
+                                ram = line[2],
+                                id_row = 'row-' + row.toString(),
+                                id_col = 'col-' + col.toString();
+
+                                if(col % 4 == 1){
+                                    dashboard.append(
+                                        '<div class="row d-flex align-content-start" id="' + id_row + '">\
+                                            <div class="col-sm-3" id="' + id_col + '" style="border:1px #C6F462 dotted;"></div>\
+                                        </div>'
+                                    );
+                                }
+                                else if(index == (len - 1) || col % 4 == 0){
+                                    $('#' + id_row).append('<div class="col-sm-3" id="' + id_col + '" style="border:1px #C6F462 dotted;"></div></div>');
+                                    dashboard.append('</div>');
+                                    row ++;
+                                }
+                                else{
+                                    $('#' + id_row).append('<div class="col-sm-3" id="' + id_col + '" style="border:1px #C6F462 dotted;"></div></div>');
+                                }
+
+                                chart = drawChart( ('#' + id_col), ip, cpu, ram );
+                                list_chart.push(chart);
+                                col ++;
+                            }
+                            catch(e){
+                                console.log(e)
+                            }
+                        });
+
+                        update_chart();
+                    },
+                    error: function(error){
+                        console.log('init():' + JSON.stringify(error))
+                    }
+                });
+            }
+
+            function update_data(){
+                $.ajax({
+                    url: (host + 'api'),
+                    type: "GET",
+                    headers: {
+                        "accept":"application/json; odata=verbose"
+                    },
+                    success: function(res){
+                        let data = res.data;              
+                        $.each(data, function(index, elem){
+                            let row = elem.split(','),
+                                ip = row[0],
+                                cpu = row[1],
+                                ram = row[2];
+                            $.each(list_chart, function(idx, chart){
+                                if(chart.opts.chart.id == ip){
+                                    chart.updateOptions({
+                                        title: { text: ('IP: ' + ip), align: 'left' },
+                                        subtitle: { text: ('CPU: ' + cpu.toString() + '% / RAM: ' + ram.toString() + '%'), align: 'left' }
+                                    });
+                                }
+                            });                            
+                        });
+                    },
+                    error: function(error){
+                        console.log('update_data():' + JSON.stringify(error))
+                    }
+                });
+            }
+
+            function update_chart(){
+                $.each(list_chart, function(index, chart){
+                    $.ajax({
+                        url: (host + 'api/ip?no=' + chart.opts.chart.id),
+                        type: "GET",
+                        headers: {
+                            "accept":"application/json; odata=verbose"
+                        },
+                        success: function(res){
+                            let data = res.data,
+                                time = [],
+                                cpu = [],
+                                ram = [];
+
+                            $.each(data, function(idx, elem){
+                                let row = elem.split(','),
+                                    hour = row[4].replace(/\'/g, "").split('T')[1].split(':')[0];
+                                cpu.push(row[2]);
+                                ram.push(row[3]);
+                                time.push(hour);
+                            });
+
+                            chart.updateSeries([
+                                { name: 'CPU', data: cpu },
+                                { name: 'RAM', data: ram }
+                            ]);
+
+                            chart.updateOptions({
+                                xaxis: {
+                                    type: 'datetime',
+                                    categories: time              
+                                }
+                            });
+                        },
+                        error: function(error){
+                            console.log('update_chart():' + JSON.stringify(error))
+                        }
+                    });
+                });
+            }
+
+            function drawChart(tag, ip, cpu, ram){
+                let options = {
+                    chart: { id: ip, height: 300, type: 'area', zoom: { enabled: false }, toolbar: {show: false} },
+                    title: { text: ('IP: ' + ip), align: 'left' },
+                    subtitle: { text: ('CPU: ' + cpu.toString() + '% / RAM: ' + ram.toString() + '%'), align: 'left' },
+                    dataLabels: { enabled: false },
+                    stroke: { curve: 'smooth' },
+                    series: [],
+                    xaxis: {},
+                    yaxis: { max: 100, min: 0, tickAmount: 5 },
+                    theme: {
+                        mode: 'dark', 
+                        palette: 'palette4',
+                    }
+                }
+
+                let chart = new ApexCharts(document.querySelector(tag), options);
+                chart.render();
+                return chart;
+            }
+
+        </script>
+    </body>
+</html>

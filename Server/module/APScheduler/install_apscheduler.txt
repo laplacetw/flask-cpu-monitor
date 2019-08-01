@@ -1,0 +1,5 @@
+pip install six-1.12.0-py2.py3-none-any.whl
+pip install pytz-2019.1-py2.py3-none-any.whl
+pip install tzlocal-1.5.1.tar.gz
+pip install setuptools-41.0.1-py2.py3-none-any.whl
+pip install APScheduler-3.6.0-py2.py3-none-any.whl
