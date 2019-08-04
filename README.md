@@ -5,7 +5,7 @@ Testing Environment :
 - OS : Windows 10
 - Python : python-3.7.2-amd64
 
-Click to watch video demo :
+Click the image below to watch video demo :
 <br><br>
 [![DEMO](https://raw.githubusercontent.com/laplacetw/flask-cpu-monitor/master/demo_02.png)](https://www.youtube.com/watch?v=qZ12nJMpYvA)
 
