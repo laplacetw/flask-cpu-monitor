@@ -18,7 +18,7 @@ Click to watch video demo :
 - We can get a .csv file about usage data by executing export.py file under Server root folder.
 
 ## Client
-- You should modify the parameter about host in client script before running.😉
+- We should modify the parameter about host in client script before running.😉
 - The client script will send usage data by POST every 10 sec.
 
 ## Installation
