@@ -1,11 +1,11 @@
 # flask-cpu-monitor 🖥
-A simple cpu monitor on web  built by Flask for local area network.
+A simple cpu monitor on web  built by Flask for local area network.<br>
 Testing Environment :
 - OS : Windows 10
 - Python : python-3.7.2-amd64
 - Click to watch video demo :
 
-[![DEMO](https://raw.githubusercontent.com/laplacetw/flask-cpu-monitor/master/demo_01.png)](https://www.youtube.com/watch?v=qZ12nJMpYvA)
+[![DEMO](https://raw.githubusercontent.com/laplacetw/flask-cpu-monitor/master/demo_02.png)](https://www.youtube.com/watch?v=qZ12nJMpYvA)
 
 ## Server
 - The monitor page will run at {server host}:8080.
