@@ -4,9 +4,7 @@ A simple cpu monitor on web  built by Flask for local area network.
 Testing Environment :
 - OS : Windows 10
 - Python : python-3.7.2-amd64
-<br>
-Click to watch video demo :
-
+Click to watch video demo :<br>
 [![DEMO](https://raw.githubusercontent.com/laplacetw/flask-cpu-monitor/master/demo_02.png)](https://www.youtube.com/watch?v=qZ12nJMpYvA)
 
 ## Server
