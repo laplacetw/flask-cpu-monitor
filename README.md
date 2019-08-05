@@ -1,4 +1,4 @@
-# flask-cpu-monitor 🖥
+# flask-cpu-monitor
 A simple cpu monitor on web  built by Flask for local area network.
 <br>
 Testing Environment :
