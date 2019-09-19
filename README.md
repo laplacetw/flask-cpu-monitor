@@ -25,7 +25,7 @@ Click the image below to watch video demo :
 1. Download and unzip the ZIP file, then install Server/Client packages offline on computers in local area network.
 2. Copy CPU_Monitor folder under Server root folder to your server host, and CPU_Monitor_client.py file to computers you want to monitor.
 3. Execute the create_database.py file under Server root folder.
-4. Run the server and client, that's all you need.😆
+4. Run the server and client, that's all.😆
 
 ## Line Chart
 Powered by [ApexCharts](https://apexcharts.com).
