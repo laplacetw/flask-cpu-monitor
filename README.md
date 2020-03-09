@@ -1,4 +1,4 @@
-![](https://img.shields.io/github/license/laplacetw/flask-cpu-monitor?style=flat-square)
+![](https://img.shields.io/github/license/laplacetw/flask-cpu-monitor)
 # flask-cpu-monitor
 A simple cpu monitor on web  built by Flask for local area network.
 <br>
