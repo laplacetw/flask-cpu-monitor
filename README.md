@@ -20,7 +20,7 @@ Click the image below to watch video demo :
 
 ## Client
 - We should modify the parameter about host in client script before running.
-- The client script will send usage data by POST every 10 sec.
+- The client script will send cpu/memory usage data by POST every 10 sec.
 
 ## Installation
 1. Download and unzip the ZIP file, then install Server/Client packages offline on computers in local area network.
