@@ -1,4 +1,4 @@
-![](https://img.shields.io/github/license/laplacetw/flask-cpu-monitor?style=for-the-badge)
+![](https://img.shields.io/github/license/laplacetw/flask-cpu-monitor?style=flat-square)
 # flask-cpu-monitor
 A simple cpu monitor on web  built by Flask for local area network.
 <br>
@@ -19,14 +19,14 @@ Click the image below to watch video demo :
 - We can get a .csv file about usage data by executing export.py file under Server root folder.
 
 ## Client
-- We should modify the parameter about host in client script before running.😉
+- We should modify the parameter about host in client script before running.
 - The client script will send usage data by POST every 10 sec.
 
 ## Installation
 1. Download and unzip the ZIP file, then install Server/Client packages offline on computers in local area network.
 2. Copy CPU_Monitor folder under Server root folder to your server host, and CPU_Monitor_client.py file to computers you want to monitor.
 3. Execute the create_database.py file under Server root folder.
-4. Run the server and client, that's all.😆
+4. Run the server and client, that's all.
 
 ## Line Chart
 Powered by [ApexCharts](https://apexcharts.com).
