@@ -15,7 +15,7 @@ Click the image below to watch video demo :
 - Running log file will be saved under Server root folder.
 - Usage data will be recorded in SQLite by Server every 10 min.
 - CPU/RAM usage data will be updated every 10 sec.
-- Line chart will be updated every 5 min.
+- Line chart will be updated every 10 sec.
 - We can get a .csv file about usage data by executing export.py file under Server root folder.
 
 ## Client
